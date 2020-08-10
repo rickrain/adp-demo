@@ -29,7 +29,7 @@ spec:
     - uri:
         exact: "/frontdoor"
     rewrite:
-      uri: "/"
+      uri: "/swagger/index.html"
     route:
     - destination:
         host: frontdoor
