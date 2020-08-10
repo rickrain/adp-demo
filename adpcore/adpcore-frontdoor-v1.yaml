@@ -21,6 +21,47 @@ spec:
         image: acradpdemo.azurecr.io/monitoring-frontdoor-api:v1
         ports:
         - containerPort: 80
+        env:
+          - name: ASPNETCORE_ENVIRONMENT
+            valueFrom:
+              secretKeyRef:
+                name: frontdoor-secrets
+                key: ASPNETCORE_ENVIRONMENT
+          - name: APPINSIGHTS_INSTRUMENTATIONKEY
+            valueFrom:
+              secretKeyRef:
+                name: frontdoor-secrets
+                key: APPINSIGHTS_INSTRUMENTATIONKEY
+          - name: FRONTDOOR_AAD_APP_ID
+            valueFrom:
+              secretKeyRef:
+                name: frontdoor-secrets
+                key: FRONTDOOR_AAD_APP_ID
+          - name: FRONTDOOR_AAD_APP_URI
+            valueFrom:
+              secretKeyRef:
+                name: frontdoor-secrets
+                key: FRONTDOOR_AAD_APP_URI
+          - name: FRONTDOOR_AAD_APP_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: frontdoor-secrets
+                key: FRONTDOOR_AAD_APP_SECRET
+          - name: FRONTDOOR_AAD_AUTHORITY
+            valueFrom:
+              secretKeyRef:
+                name: frontdoor-secrets
+                key: FRONTDOOR_AAD_AUTHORITY
+          - name: FRONTDOOR_ADX_CLUSTER
+            valueFrom:
+              secretKeyRef:
+                name: frontdoor-secrets
+                key: FRONTDOOR_ADX_CLUSTER
+          - name: FRONTDOOR_ADX_DATABASE
+            valueFrom:
+              secretKeyRef:
+                name: frontdoor-secrets
+                key: FRONTDOOR_ADX_DATABASE
 ---
 apiVersion: v1
 kind: Service
