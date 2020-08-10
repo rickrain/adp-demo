@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontdoor-v1
+  namespace: adpcore
+  labels:
+    version: v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontdoor
+  template:
+    metadata:
+      labels:
+        app: frontdoor
+        version: v1
+    spec:
+      containers:
+      - name: frontdoor
+        image: acradpdemo.azurecr.io/monitoring-frontdoor-api:v1
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontdoor
+  namespace: adpcore
+  labels: 
+    app: frontdoor
+spec:
+  selector:
+    app: frontdoor
+  ports:
+  - name: http
+    port: 80
