@@ -25,13 +25,8 @@ spec:
   gateways:
   - frontdoor-gateway
   http:
-  - match:
-    - uri:
-        exact: "/frontdoor"
-    rewrite:
-      uri: "/swagger/index.html"
-    route:
+  - route:
     - destination:
-        host: frontdoor
+        host: frontdoor.local
         port:
           number: 80
