@@ -1,0 +1,40 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: table
+  namespace: team1
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - team1-gateway
+  http:
+  - match:
+    - headers:
+        ring:
+          exact: dev
+        service:
+          exact: table
+    route:
+    - destination:
+        host: table
+        subset: v2
+  - match:
+    - headers:
+        ring:
+          exact: prod
+        service:
+          exact: table
+    route:
+    - destination:
+        host: table
+        subset: v1
+  - match:
+    - uri:
+        prefix: "/table"
+    rewrite:
+      uri: "/"
+    route:
+    - destination:
+        host: table
+        subset: v1

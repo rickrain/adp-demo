@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: testsvc
+  namespace: team2
+  labels: 
+    app: testsvc
+spec:
+  selector:
+    app: testsvc
+  ports:
+  - name: http
+    port: 80

@@ -1,0 +1,30 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: testsvc
+  namespace: team2
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - team2-gateway
+  http:
+  - match:
+    - headers:
+        ring:
+          exact: prod
+        service:
+          exact: testsvc
+    route:
+    - destination:
+        host: testsvc
+        subset: v1
+  - match:
+    - uri:
+        prefix: "/testsvc"
+    rewrite:
+      uri: "/"
+    route:
+    - destination:
+        host: testsvc
+        subset: v1

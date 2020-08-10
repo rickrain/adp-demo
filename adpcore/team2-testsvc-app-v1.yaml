@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: testsvc
+  namespace: team2
+  labels:
+    version: v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: testsvc
+  template:
+    metadata:
+      labels:
+        app: testsvc
+        version: v1
+    spec:
+      containers:
+      - name: testsvc
+        image: davwhite.azurecr.io/team2-testsvc:v1.0.0
+        ports:
+        - containerPort: 80
+ 

@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: table-v1
+  namespace: team1
+  labels:
+    version: v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: table
+  template:
+    metadata:
+      labels:
+        app: table
+        version: v1
+    spec:
+      containers:
+      - name: table
+        image: davwhite.azurecr.io/team1-table:v1.0.0
+        ports:
+        - containerPort: 80
+ 
