@@ -27,6 +27,6 @@ spec:
   http:
   - route:
     - destination:
-        host: frontdoor.local
+        host: frontdoor
         port:
           number: 80
